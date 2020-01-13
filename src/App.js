@@ -11,15 +11,14 @@ function App() {
   const [search,setSearch]=useState();
   const [query,setQuery]=useState('chicken');
 
-  useEffect(
-    ()=>{getRecipes()
-    },[query]);
+  useEffect(() => { getRecipes();},[query]);
   const updateSearch =e => {
     setSearch(e.target.value);
   }
   const getSearch = e =>{
     e.preventDefault();
     setQuery(search);
+    setSearch('');
   }
 
   const getRecipes= async ()=>{
@@ -27,13 +26,14 @@ function App() {
       `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     const data =await response.json();
-    setRecipes(data.hits)
+    setRecipes(data.hits);
+    console.log(data);
   }
 
 
   return (
     <div className="App">
-        <form onSubmit={getSearch}>
+        <form onSubmit={getSearch} className="search-form">
           <input 
           type="text" 
           className="search-bar"
@@ -44,15 +44,22 @@ function App() {
             Search
           </button>
         </form>
-        {recipes.map(recipe => (
-          <Recipe 
-          key={recipe.recipe.label}
-          title={recipe.recipe.label}
-          calories={recipe.recipe.calories}
-          img={recipe.recipe.image}
-          />
+        <div className="container">
+                {recipes.map(recipe => (
+                  <Recipe 
+                  key={recipe.recipe.label}
+                  title={recipe.recipe.label}
+                  calories={recipe.recipe.calories}
+                  img={recipe.recipe.image}
+                  ingredients={recipe.recipe.ingredients}
+                  serves={recipe.recipe.yield}
+                  type={recipe.recipe.source}
+                  weight={recipe.recipe.totalWeight}
+                  caution={recipe.recipe.cautions}
+                  />
 
-        ))}
+                ))}
+                </div>
         </div>
   );
 }
