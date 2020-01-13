@@ -26,6 +26,14 @@
     padding-left: 10px;
     text-align: center;
 }
+.App>.search-form>.search-bar:active,.App>.search-form>.search-bar:focus{
+    border: none;
+}
+.App>.search-form>.search-button:hover,.App>.search-form>.search-button:active{
+    background-color: #000;
+    color: #fff;
+    transition: 1s ease;
+}
 .App>.search-form>.search-button{
     height: auto;
     font-size: 20px;
