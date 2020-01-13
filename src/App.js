@@ -38,7 +38,8 @@ function App() {
           type="text" 
           className="search-bar"
           value={search}
-          onChange={updateSearch} 
+          onChange={updateSearch}
+          placeholder="Enter Your Search Item"           
           />
           <button type="submit" className="search-button">
             Search
